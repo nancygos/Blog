@@ -1,0 +1,27 @@
+<%= form_with(model: article) do |form| %>
+    <% if @article.errors.any? %>
+        <div>
+            <h4> <%= pluralize(article.errors.count, "error") %>. Article can not be saved. </h4>
+
+            <ul>
+                <% article.errors.each do |error| %>
+                    <li> <%= error.full_message %> </li>
+                <%end%>
+            </ul>
+        </div>
+    <%end%>
+
+    <div> 
+        <%= form.label :title %> <br>
+        <%= form.text_field :title %>
+    </div>
+
+    <div>
+        <%= form.label :body %> <br>
+        <%= form.text_area :body %>
+    </div>
+
+    <div class='actions'>
+        <%= form.submit%>
+    </div>
+<%end%>

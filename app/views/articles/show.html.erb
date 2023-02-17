@@ -1,0 +1,40 @@
+<h1> <%= @article.title %> </h1>
+<p> <%= @article.body %> </p>
+
+<ul class='list_style' >
+    <li class='btn' > <%= link_to "Edit" , edit_article_path(@article) %> </li>
+    <li class='btn'> <%= link_to "Destroy" , article_path(@article) ,method: :delete, data:{confirm:'Are you sure?'} %> </li>
+
+    <li class='btn' > <%= link_to "Back" , root_path %> </li>
+</ul>
+
+<br> <br>
+
+<h4>Comments</h4>
+<% @article.comments.each do |comment| %>
+    <h5>Commenter:</h5>
+    <%= comment.commenter%>
+
+
+    <h5>comment</h5>
+    <%= comment.body%>
+
+    <div class='btn bottom_btn back_btn'> <%= link_to "Delete Comment" , article_comments_path(comment) ,method: :delete, data:{confirm:'Are you sure?'} %> </div>
+<%end%>
+
+<br> <br>
+
+<h4> Add a comment</h4>
+<%= form_with model: [@article, @article.comments.build ] do |form|  %>
+    <p>
+        <%=form.label :commenter%> <br>
+        <%=form.text_field :commenter%>
+    </p>
+
+    <p>
+        <%= form.label :body%> <br>
+        <%= form.text_area :body%>
+    </p>
+
+    <%= form.submit%>
+<%end%>
